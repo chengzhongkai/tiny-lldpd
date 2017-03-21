@@ -106,6 +106,7 @@ void send_lldp_packet(const char *if_name, int sock)
     socket_address.sll_ifindex = if_index;
     socket_address.sll_halen = ETH_ALEN;
     memcpy(socket_address.sll_addr, dst_address, ETH_ALEN);
+    // https://linux.die.net/man/3/sendto
     if (sendto(sock, sendbuf, frame_size, 0, (struct sockaddr*)&socket_address, sizeof(struct sockaddr_ll)) < 0) {
         syslog(LOG_ERR, "LLDP packet send failed\n");
     }
